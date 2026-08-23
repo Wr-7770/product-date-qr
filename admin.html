@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إدارة المنتجات</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f6f8;color:#222}
+.container{min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px}
+.card{width:100%;max-width:520px;background:#fff;border-radius:20px;padding:28px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+h1{text-align:center;margin:0 0 8px}.sub{text-align:center;color:#666;margin:0 0 25px}
+label{display:block;margin:14px 0 7px;font-weight:bold}input{width:100%;padding:13px;border:1px solid #ddd;border-radius:10px;font-size:16px}
+button{width:100%;margin-top:22px;padding:14px;border:0;border-radius:10px;background:#222;color:#fff;font-size:17px;font-weight:bold}
+.result{display:none;margin-top:25px;padding-top:20px;border-top:1px solid #eee}
+.url{direction:ltr;word-break:break-all;background:#f4f4f4;padding:12px;border-radius:10px;font-size:13px}
+#qr{display:block;width:240px;height:240px;margin:20px auto}.copy{background:#eee;color:#222}
+</style>
+</head>
+<body>
+<main class="container"><section class="card">
+<h1>إدارة المنتجات</h1><p class="sub">إنشاء رابط وQR للمنتج</p>
+<label>اسم المنتج</label><input id="name" placeholder="مثال: عصير برتقال">
+<label>تاريخ الإنتاج</label><input id="production" type="date">
+<label>تاريخ الانتهاء</label><input id="expiry" type="date">
+<label>رقم التشغيلة</label><input id="lot" placeholder="مثال: LOT-003">
+<button onclick="createProduct()">إنشاء المنتج</button>
+<div id="result" class="result"><h2>تم إنشاء المنتج ✅</h2>
+<p>رابط المنتج:</p><div id="url" class="url"></div>
+<img id="qr" alt="QR Code"><button class="copy" onclick="copyUrl()">نسخ الرابط</button>
+</div></section></main>
+<script>
+function createProduct(){
+const name=document.getElementById("name").value.trim(),production=document.getElementById("production").value,expiry=document.getElementById("expiry").value,lot=document.getElementById("lot").value.trim();
+if(!name||!production||!expiry||!lot){alert("أكمل جميع البيانات أولًا.");return;}
+const base=new URL("./",window.location.href).href;
+const url=new URL(base);
+url.searchParams.set("name",name);url.searchParams.set("production",production);url.searchParams.set("expiry",expiry);url.searchParams.set("lot",lot);
+const finalUrl=url.href;
+document.getElementById("url").textContent=finalUrl;
+document.getElementById("qr").src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="+encodeURIComponent(finalUrl);
+document.getElementById("result").style.display="block";
+}
+function copyUrl(){navigator.clipboard.writeText(document.getElementById("url").textContent);alert("تم نسخ الرابط.");}
+</script>
+</body></html>
