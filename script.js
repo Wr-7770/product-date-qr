@@ -1,28 +1,13 @@
-// بيانات المنتجات التجريبية
-const products = {
-  "LOT-001": {
-    name: "عصير برتقال",
-    productionDate: "2026-08-20",
-    expiryDate: "2026-09-20",
-    lot: "LOT-001"
-  },
+const params = new URLSearchParams(window.location.search);
 
-  "LOT-002": {
-    name: "حليب",
-    productionDate: "2026-08-15",
-    expiryDate: "2026-09-15",
-    lot: "LOT-002"
-  }
+const product = {
+  name: params.get("name"),
+  productionDate: params.get("production"),
+  expiryDate: params.get("expiry"),
+  lot: params.get("lot")
 };
 
-// قراءة رقم المنتج من الرابط
-const params = new URLSearchParams(window.location.search);
-const productId = params.get("id");
-
-// البحث عن المنتج
-const product = products[productId];
-
-if (!product) {
+if (!product.name || !product.productionDate || !product.expiryDate || !product.lot) {
   document.getElementById("product").textContent = "منتج غير موجود";
   document.getElementById("production").textContent = "-";
   document.getElementById("expiry").textContent = "-";
@@ -30,7 +15,6 @@ if (!product) {
   document.getElementById("status").textContent =
     "⚠️ لم يتم العثور على بيانات المنتج";
 } else {
-
   document.getElementById("product").textContent = product.name;
 
   document.getElementById("production").textContent =
@@ -41,7 +25,6 @@ if (!product) {
 
   document.getElementById("lot").textContent = product.lot;
 
-  // التحقق من الصلاحية
   const today = new Date();
   const expiry = new Date(product.expiryDate);
 
@@ -54,13 +37,10 @@ if (!product) {
   }
 }
 
-// تحويل التاريخ إلى صيغة عربية
 function formatDate(dateString) {
-  const date = new Date(dateString);
-
-  return date.toLocaleDateString("ar-SA", {
+  return new Date(dateString).toLocaleDateString("ar-SA", {
     year: "numeric",
     month: "long",
     day: "numeric"
   });
-}
+} 
