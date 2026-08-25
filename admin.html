@@ -19,117 +19,160 @@ body {
 }
 
 .container {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    max-width: 900px;
+    margin: auto;
     padding: 20px;
 }
 
 .card {
-    width: 100%;
-    max-width: 540px;
     background: white;
     border-radius: 22px;
-    padding: 30px;
-    box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+    padding: 28px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.07);
 }
 
 h1 {
     text-align: center;
+    margin: 0 0 8px;
     font-size: 36px;
-    margin: 0 0 10px;
 }
 
 .subtitle {
     text-align: center;
     color: #777;
-    font-size: 18px;
     margin-bottom: 30px;
 }
 
 label {
     display: block;
-    font-size: 18px;
     font-weight: bold;
-    margin: 18px 0 8px;
+    margin: 16px 0 7px;
 }
 
 input {
     width: 100%;
-    padding: 15px;
+    padding: 14px;
     border: 1px solid #ddd;
-    border-radius: 12px;
-    font-size: 17px;
-    background: #fff;
-}
-
-input:focus {
-    outline: none;
-    border-color: #222;
+    border-radius: 11px;
+    font-size: 16px;
 }
 
 button {
     width: 100%;
-    padding: 16px;
-    margin-top: 25px;
-    border: none;
-    border-radius: 12px;
+    padding: 15px;
+    margin-top: 22px;
+    border: 0;
+    border-radius: 11px;
     background: #222;
     color: white;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: bold;
     cursor: pointer;
 }
 
-button:active {
-    transform: scale(0.99);
+button:hover {
+    opacity: .9;
 }
 
 .error {
     display: none;
-    margin-top: 18px;
-    padding: 16px;
-    border-radius: 12px;
-    background: #ffe7e7;
+    margin-top: 15px;
+    padding: 14px;
+    border-radius: 11px;
+    background: #ffe5e5;
     color: #b00020;
-    font-size: 17px;
     font-weight: bold;
     line-height: 1.6;
 }
 
 .success {
     display: none;
-    margin-top: 30px;
-    padding-top: 25px;
+    margin-top: 25px;
+    padding-top: 20px;
     border-top: 1px solid #eee;
 }
 
-.success h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.url-box {
-    background: #f2f2f2;
-    padding: 14px;
-    border-radius: 10px;
+.url {
     direction: ltr;
     text-align: left;
     word-break: break-all;
-    font-size: 14px;
+    background: #f2f2f2;
+    padding: 12px;
+    border-radius: 10px;
 }
 
 #qr {
     display: block;
-    width: 250px;
-    height: 250px;
-    margin: 25px auto;
+    width: 230px;
+    height: 230px;
+    margin: 20px auto;
 }
 
-.copy-btn {
+.copy {
     background: #eee;
     color: #222;
+}
+
+.clear {
+    background: #b00020;
+}
+
+.products-title {
+    font-size: 27px;
+    margin-top: 0;
+}
+
+.product {
+    border: 1px solid #eee;
+    border-radius: 15px;
+    padding: 18px;
+    margin-top: 15px;
+    background: #fafafa;
+}
+
+.product-name {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.product-row {
+    margin: 7px 0;
+    color: #555;
+}
+
+.status {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.valid {
+    background: #e3f6e3;
+    color: #168316;
+}
+
+.expired {
+    background: #ffe3e3;
+    color: #c00000;
+}
+
+.product-link {
+    display: block;
+    margin-top: 12px;
+    color: #1769aa;
+    word-break: break-all;
+    direction: ltr;
+    text-align: left;
+}
+
+.empty {
+    text-align: center;
+    color: #777;
+    padding: 25px;
 }
 </style>
 </head>
@@ -137,6 +180,10 @@ button:active {
 <body>
 
 <div class="container">
+
+<!-- =========================
+     إنشاء منتج
+========================= -->
 
 <div class="card">
 
@@ -146,10 +193,7 @@ button:active {
 إنشاء رابط وQR للمنتج
 </div>
 
-
-<label for="name">
-اسم المنتج
-</label>
+<label for="name">اسم المنتج</label>
 
 <input
     id="name"
@@ -158,9 +202,7 @@ button:active {
 >
 
 
-<label for="production">
-تاريخ الإنتاج
-</label>
+<label for="production">تاريخ الإنتاج</label>
 
 <input
     id="production"
@@ -168,9 +210,7 @@ button:active {
 >
 
 
-<label for="expiry">
-تاريخ الانتهاء
-</label>
+<label for="expiry">تاريخ الانتهاء</label>
 
 <input
     id="expiry"
@@ -178,9 +218,7 @@ button:active {
 >
 
 
-<label for="lot">
-رقم التشغيلة
-</label>
+<label for="lot">رقم التشغيلة</label>
 
 <input
     id="lot"
@@ -191,7 +229,6 @@ button:active {
 
 <div id="error" class="error"></div>
 
-
 <button onclick="createProduct()">
 إنشاء المنتج
 </button>
@@ -199,31 +236,38 @@ button:active {
 
 <div id="success" class="success">
 
-<h2>
-تم إنشاء المنتج ✅
-</h2>
+<h2>تم إنشاء المنتج ✅</h2>
 
-<p>
-رابط المنتج:
-</p>
+<p>رابط المنتج:</p>
 
-<div id="url" class="url-box"></div>
+<div id="url" class="url"></div>
 
+<img id="qr" alt="QR Code">
 
-<img
-    id="qr"
-    alt="QR Code"
->
-
-
-<button
-    class="copy-btn"
-    onclick="copyUrl()"
->
+<button class="copy" onclick="copyUrl()">
 نسخ الرابط
 </button>
 
 </div>
+
+</div>
+
+
+<!-- =========================
+     سجل المنتجات
+========================= -->
+
+<div class="card">
+
+<h2 class="products-title">
+سجل المنتجات
+</h2>
+
+<div id="productsList"></div>
+
+<button class="clear" onclick="clearProducts()">
+مسح سجل المنتجات
+</button>
 
 </div>
 
@@ -233,7 +277,17 @@ button:active {
 <script>
 
 /* =========================================
-   إنشاء المنتج
+   تحميل المنتجات
+========================================= */
+
+let products =
+    JSON.parse(
+        localStorage.getItem("products") || "[]"
+    );
+
+
+/* =========================================
+   إنشاء منتج
 ========================================= */
 
 function createProduct() {
@@ -257,69 +311,41 @@ function createProduct() {
         document.getElementById("success");
 
 
-    /* إخفاء النتائج القديمة */
-
     error.style.display = "none";
     success.style.display = "none";
 
 
-    /* =========================================
-       1 - اسم المنتج فارغ
-    ========================================= */
+    /* اسم المنتج */
 
     if (!name) {
-
-        showError(
-            "يرجى كتابة اسم المنتج."
-        );
-
+        showError("يرجى كتابة اسم المنتج.");
         return;
     }
 
 
-    /* =========================================
-       2 - تاريخ الإنتاج فارغ
-    ========================================= */
+    /* تاريخ الإنتاج */
 
     if (!production) {
-
-        showError(
-            "يرجى اختيار تاريخ الإنتاج."
-        );
-
+        showError("يرجى اختيار تاريخ الإنتاج.");
         return;
     }
 
 
-    /* =========================================
-       3 - تاريخ الانتهاء فارغ
-    ========================================= */
+    /* تاريخ الانتهاء */
 
     if (!expiry) {
-
-        showError(
-            "يرجى اختيار تاريخ الانتهاء."
-        );
-
+        showError("يرجى اختيار تاريخ الانتهاء.");
         return;
     }
 
 
-    /* =========================================
-       4 - رقم التشغيلة فارغ
-    ========================================= */
+    /* رقم التشغيلة */
 
     if (!lot) {
-
-        showError(
-            "يرجى كتابة رقم التشغيلة."
-        );
-
+        showError("يرجى كتابة رقم التشغيلة.");
         return;
     }
 
-
-    /* تحويل التواريخ */
 
     const productionDate =
         new Date(production + "T00:00:00");
@@ -328,36 +354,46 @@ function createProduct() {
         new Date(expiry + "T00:00:00");
 
 
-    /* تاريخ اليوم */
-
-    const today =
-        new Date();
+    const today = new Date();
 
     today.setHours(0, 0, 0, 0);
 
 
-    /* =========================================
-       5 - تاريخ الإنتاج في المستقبل
-    ========================================= */
+    /* الإنتاج في المستقبل */
 
     if (productionDate > today) {
 
         showError(
-            "خطأ: تاريخ الإنتاج لا يمكن أن يكون في المستقبل."
+            "تاريخ الإنتاج لا يمكن أن يكون في المستقبل."
         );
 
         return;
     }
 
 
-    /* =========================================
-       6 - تاريخ الانتهاء قبل الإنتاج
-    ========================================= */
+    /* الانتهاء قبل الإنتاج */
 
     if (expiryDate < productionDate) {
 
         showError(
-            "خطأ: تاريخ الانتهاء لا يمكن أن يكون قبل تاريخ الإنتاج."
+            "تاريخ الانتهاء لا يمكن أن يكون قبل تاريخ الإنتاج."
+        );
+
+        return;
+    }
+
+
+    /* منع تكرار رقم التشغيلة */
+
+    const duplicate =
+        products.some(
+            product => product.lot.toLowerCase() === lot.toLowerCase()
+        );
+
+    if (duplicate) {
+
+        showError(
+            "رقم التشغيلة موجود بالفعل. استخدم رقمًا مختلفًا."
         );
 
         return;
@@ -365,7 +401,16 @@ function createProduct() {
 
 
     /* =========================================
-       7 - كل شيء صحيح
+       إنشاء معرف فريد
+    ========================================= */
+
+    const id =
+        "P-" +
+        Date.now().toString(36).toUpperCase();
+
+
+    /* =========================================
+       إنشاء رابط المنتج
     ========================================= */
 
     const baseUrl =
@@ -378,35 +423,77 @@ function createProduct() {
 
     const productUrl =
         baseUrl +
-        "?name=" + encodeURIComponent(name) +
+        "?id=" + encodeURIComponent(id) +
+        "&name=" + encodeURIComponent(name) +
         "&production=" + encodeURIComponent(production) +
         "&expiry=" + encodeURIComponent(expiry) +
         "&lot=" + encodeURIComponent(lot);
 
 
-    /* عرض الرابط */
+    /* =========================================
+       حفظ المنتج
+    ========================================= */
+
+    const product = {
+
+        id: id,
+
+        name: name,
+
+        production: production,
+
+        expiry: expiry,
+
+        lot: lot,
+
+        url: productUrl,
+
+        createdAt:
+            new Date().toISOString()
+    };
+
+
+    products.unshift(product);
+
+
+    localStorage.setItem(
+        "products",
+        JSON.stringify(products)
+    );
+
+
+    /* =========================================
+       عرض الرابط
+    ========================================= */
 
     document.getElementById("url").textContent =
         productUrl;
 
 
-    /* إنشاء QR */
+    /* =========================================
+       QR
+    ========================================= */
 
-    const qrUrl =
+    document.getElementById("qr").src =
         "https://api.qrserver.com/v1/create-qr-code/" +
         "?size=300x300&data=" +
         encodeURIComponent(productUrl);
 
 
-    document.getElementById("qr").src =
-        qrUrl;
+    success.style.display = "block";
 
 
-    /* إظهار النتيجة */
+    /* تحديث السجل */
 
-    success.style.display =
-        "block";
+    renderProducts();
 
+
+    /* تنظيف الحقول */
+
+    document.getElementById("name").value = "";
+    document.getElementById("production").value = "";
+    document.getElementById("expiry").value = "";
+    document.getElementById("lot").value = "";
 }
 
 
@@ -422,8 +509,128 @@ function showError(message) {
     error.textContent =
         "⚠️ " + message;
 
-    error.style.display =
-        "block";
+    error.style.display = "block";
+}
+
+
+/* =========================================
+   معرفة حالة المنتج
+========================================= */
+
+function getStatus(expiry) {
+
+    const today = new Date();
+
+    today.setHours(0, 0, 0, 0);
+
+    const expiryDate =
+        new Date(expiry + "T23:59:59");
+
+    if (expiryDate < today) {
+
+        return {
+            text: "🔴 منتهي الصلاحية",
+            className: "expired"
+        };
+
+    }
+
+    return {
+        text: "🟢 المنتج صالح",
+        className: "valid"
+    };
+}
+
+
+/* =========================================
+   عرض سجل المنتجات
+========================================= */
+
+function renderProducts() {
+
+    const list =
+        document.getElementById("productsList");
+
+
+    if (products.length === 0) {
+
+        list.innerHTML =
+            '<div class="empty">' +
+            'لا توجد منتجات حتى الآن.' +
+            '</div>';
+
+        return;
+    }
+
+
+    list.innerHTML = "";
+
+
+    products.forEach(function(product) {
+
+        const status =
+            getStatus(product.expiry);
+
+
+        const div =
+            document.createElement("div");
+
+        div.className = "product";
+
+
+        div.innerHTML = `
+
+            <div class="product-name">
+                ${escapeHtml(product.name)}
+            </div>
+
+            <div class="product-row">
+                <b>رقم التشغيلة:</b>
+                ${escapeHtml(product.lot)}
+            </div>
+
+            <div class="product-row">
+                <b>الإنتاج:</b>
+                ${product.production}
+            </div>
+
+            <div class="product-row">
+                <b>الانتهاء:</b>
+                ${product.expiry}
+            </div>
+
+            <div class="status ${status.className}">
+                ${status.text}
+            </div>
+
+            <a
+                class="product-link"
+                href="${product.url}"
+                target="_blank"
+            >
+                فتح صفحة المنتج
+            </a>
+        `;
+
+
+        list.appendChild(div);
+
+    });
+}
+
+
+/* =========================================
+   حماية النصوص
+========================================= */
+
+function escapeHtml(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
 }
 
 
@@ -444,13 +651,42 @@ function copyUrl() {
         })
         .catch(function() {
 
-            alert("لم يتم نسخ الرابط تلقائيًا.");
+            alert("تعذر نسخ الرابط.");
 
         });
-
 }
+
+
+/* =========================================
+   مسح السجل
+========================================= */
+
+function clearProducts() {
+
+    if (
+        !confirm(
+            "هل أنت متأكد من مسح سجل المنتجات؟"
+        )
+    ) {
+        return;
+    }
+
+
+    products = [];
+
+    localStorage.removeItem("products");
+
+    renderProducts();
+}
+
+
+/* =========================================
+   تشغيل السجل عند فتح الصفحة
+========================================= */
+
+renderProducts();
 
 </script>
 
 </body>
-</html> 
+</html>
