@@ -3,258 +3,451 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>إدارة المنتجات</title>
 
 <style>
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  color: #222;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
 }
 
 .container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
 .card {
-  width: 100%;
-  max-width: 520px;
-  background: white;
-  border-radius: 20px;
-  padding: 28px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    width: 100%;
+    max-width: 540px;
+    background: white;
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.08);
 }
 
 h1 {
-  text-align: center;
-  margin: 0 0 8px;
+    text-align: center;
+    font-size: 36px;
+    margin: 0 0 10px;
 }
 
-.sub {
-  text-align: center;
-  color: #666;
-  margin: 0 0 25px;
+.subtitle {
+    text-align: center;
+    color: #777;
+    font-size: 18px;
+    margin-bottom: 30px;
 }
 
 label {
-  display: block;
-  margin: 14px 0 7px;
-  font-weight: bold;
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 18px 0 8px;
 }
 
 input {
-  width: 100%;
-  padding: 13px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  font-size: 16px;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 17px;
+    background: #fff;
+}
+
+input:focus {
+    outline: none;
+    border-color: #222;
 }
 
 button {
-  width: 100%;
-  margin-top: 22px;
-  padding: 14px;
-  border: 0;
-  border-radius: 10px;
-  background: #222;
-  color: white;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
+    width: 100%;
+    padding: 16px;
+    margin-top: 25px;
+    border: none;
+    border-radius: 12px;
+    background: #222;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.99);
 }
 
 .error {
-  display: none;
-  margin-top: 16px;
-  padding: 13px;
-  border-radius: 10px;
-  background: #ffe8e8;
-  color: #b00020;
-  font-weight: bold;
+    display: none;
+    margin-top: 18px;
+    padding: 16px;
+    border-radius: 12px;
+    background: #ffe7e7;
+    color: #b00020;
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 1.6;
 }
 
-.result {
-  display: none;
-  margin-top: 25px;
-  padding-top: 20px;
-  border-top: 1px solid #eee;
+.success {
+    display: none;
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #eee;
 }
 
-.url {
-  direction: ltr;
-  word-break: break-all;
-  background: #f4f4f4;
-  padding: 12px;
-  border-radius: 10px;
-  font-size: 13px;
+.success h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.url-box {
+    background: #f2f2f2;
+    padding: 14px;
+    border-radius: 10px;
+    direction: ltr;
+    text-align: left;
+    word-break: break-all;
+    font-size: 14px;
 }
 
 #qr {
-  display: block;
-  width: 240px;
-  height: 240px;
-  margin: 20px auto;
+    display: block;
+    width: 250px;
+    height: 250px;
+    margin: 25px auto;
 }
 
-.copy {
-  background: #eee;
-  color: #222;
+.copy-btn {
+    background: #eee;
+    color: #222;
 }
 </style>
 </head>
 
 <body>
 
-<main class="container">
-<section class="card">
+<div class="container">
+
+<div class="card">
 
 <h1>إدارة المنتجات</h1>
-<p class="sub">إنشاء رابط وQR للمنتج</p>
 
-<label>اسم المنتج</label>
-<input id="name" placeholder="مثال: عصير برتقال">
+<div class="subtitle">
+إنشاء رابط وQR للمنتج
+</div>
 
-<label>تاريخ الإنتاج</label>
-<input id="production" type="date">
 
-<label>تاريخ الانتهاء</label>
-<input id="expiry" type="date">
+<label for="name">
+اسم المنتج
+</label>
 
-<label>رقم التشغيلة</label>
-<input id="lot" placeholder="مثال: LOT-003">
+<input
+    id="name"
+    type="text"
+    placeholder="مثال: بيض"
+>
+
+
+<label for="production">
+تاريخ الإنتاج
+</label>
+
+<input
+    id="production"
+    type="date"
+>
+
+
+<label for="expiry">
+تاريخ الانتهاء
+</label>
+
+<input
+    id="expiry"
+    type="date"
+>
+
+
+<label for="lot">
+رقم التشغيلة
+</label>
+
+<input
+    id="lot"
+    type="text"
+    placeholder="مثال: LOT-123"
+>
+
 
 <div id="error" class="error"></div>
+
 
 <button onclick="createProduct()">
 إنشاء المنتج
 </button>
 
-<div id="result" class="result">
 
-<h2>تم إنشاء المنتج ✅</h2>
+<div id="success" class="success">
 
-<p>رابط المنتج:</p>
+<h2>
+تم إنشاء المنتج ✅
+</h2>
 
-<div id="url" class="url"></div>
+<p>
+رابط المنتج:
+</p>
 
-<img id="qr" alt="QR Code">
+<div id="url" class="url-box"></div>
 
-<button class="copy" onclick="copyUrl()">
+
+<img
+    id="qr"
+    alt="QR Code"
+>
+
+
+<button
+    class="copy-btn"
+    onclick="copyUrl()"
+>
 نسخ الرابط
 </button>
 
 </div>
 
-</section>
-</main>
+</div>
+
+</div>
+
 
 <script>
 
+/* =========================================
+   إنشاء المنتج
+========================================= */
+
 function createProduct() {
 
-  const name =
-    document.getElementById("name").value.trim();
+    const name =
+        document.getElementById("name").value.trim();
 
-  const production =
-    document.getElementById("production").value;
+    const production =
+        document.getElementById("production").value;
 
-  const expiry =
-    document.getElementById("expiry").value;
+    const expiry =
+        document.getElementById("expiry").value;
 
-  const lot =
-    document.getElementById("lot").value.trim();
+    const lot =
+        document.getElementById("lot").value.trim();
 
-  const error =
-    document.getElementById("error");
+    const error =
+        document.getElementById("error");
 
-  document.getElementById("result").style.display = "none";
-  error.style.display = "none";
+    const success =
+        document.getElementById("success");
 
-  /* التأكد من تعبئة البيانات */
 
-  if (!name || !production || !expiry || !lot) {
-    return showError(
-      "أكمل جميع بيانات المنتج أولًا."
-    );
-  }
+    /* إخفاء النتائج القديمة */
 
-  const p =
-    new Date(production + "T00:00:00");
+    error.style.display = "none";
+    success.style.display = "none";
 
-  const e =
-    new Date(expiry + "T00:00:00");
 
-  /* تاريخ الانتهاء قبل الإنتاج */
+    /* =========================================
+       1 - اسم المنتج فارغ
+    ========================================= */
 
-  if (e < p) {
-    return showError(
-      "خطأ: تاريخ الانتهاء لا يمكن أن يكون قبل تاريخ الإنتاج."
-    );
-  }
+    if (!name) {
 
-  /* تاريخ الإنتاج في المستقبل */
+        showError(
+            "يرجى كتابة اسم المنتج."
+        );
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+        return;
+    }
 
-  if (p > today) {
-    return showError(
-      "خطأ: تاريخ الإنتاج لا يمكن أن يكون في المستقبل."
-    );
-  }
 
-  /* إنشاء الرابط */
+    /* =========================================
+       2 - تاريخ الإنتاج فارغ
+    ========================================= */
 
-  const url = new URL("./", location.href);
+    if (!production) {
 
-  url.searchParams.set("name", name);
-  url.searchParams.set("production", production);
-  url.searchParams.set("expiry", expiry);
-  url.searchParams.set("lot", lot);
+        showError(
+            "يرجى اختيار تاريخ الإنتاج."
+        );
 
-  const finalUrl = url.href;
+        return;
+    }
 
-  document.getElementById("url").textContent =
-    finalUrl;
 
-  /* إنشاء QR */
+    /* =========================================
+       3 - تاريخ الانتهاء فارغ
+    ========================================= */
 
-  document.getElementById("qr").src =
-    "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="
-    + encodeURIComponent(finalUrl);
+    if (!expiry) {
 
-  document.getElementById("result").style.display =
-    "block";
+        showError(
+            "يرجى اختيار تاريخ الانتهاء."
+        );
+
+        return;
+    }
+
+
+    /* =========================================
+       4 - رقم التشغيلة فارغ
+    ========================================= */
+
+    if (!lot) {
+
+        showError(
+            "يرجى كتابة رقم التشغيلة."
+        );
+
+        return;
+    }
+
+
+    /* تحويل التواريخ */
+
+    const productionDate =
+        new Date(production + "T00:00:00");
+
+    const expiryDate =
+        new Date(expiry + "T00:00:00");
+
+
+    /* تاريخ اليوم */
+
+    const today =
+        new Date();
+
+    today.setHours(0, 0, 0, 0);
+
+
+    /* =========================================
+       5 - تاريخ الإنتاج في المستقبل
+    ========================================= */
+
+    if (productionDate > today) {
+
+        showError(
+            "خطأ: تاريخ الإنتاج لا يمكن أن يكون في المستقبل."
+        );
+
+        return;
+    }
+
+
+    /* =========================================
+       6 - تاريخ الانتهاء قبل الإنتاج
+    ========================================= */
+
+    if (expiryDate < productionDate) {
+
+        showError(
+            "خطأ: تاريخ الانتهاء لا يمكن أن يكون قبل تاريخ الإنتاج."
+        );
+
+        return;
+    }
+
+
+    /* =========================================
+       7 - كل شيء صحيح
+    ========================================= */
+
+    const baseUrl =
+        window.location.origin +
+        window.location.pathname.replace(
+            "admin.html",
+            ""
+        );
+
+
+    const productUrl =
+        baseUrl +
+        "?name=" + encodeURIComponent(name) +
+        "&production=" + encodeURIComponent(production) +
+        "&expiry=" + encodeURIComponent(expiry) +
+        "&lot=" + encodeURIComponent(lot);
+
+
+    /* عرض الرابط */
+
+    document.getElementById("url").textContent =
+        productUrl;
+
+
+    /* إنشاء QR */
+
+    const qrUrl =
+        "https://api.qrserver.com/v1/create-qr-code/" +
+        "?size=300x300&data=" +
+        encodeURIComponent(productUrl);
+
+
+    document.getElementById("qr").src =
+        qrUrl;
+
+
+    /* إظهار النتيجة */
+
+    success.style.display =
+        "block";
+
 }
 
+
+/* =========================================
+   عرض الخطأ
+========================================= */
 
 function showError(message) {
 
-  const error =
-    document.getElementById("error");
+    const error =
+        document.getElementById("error");
 
-  error.textContent = "⚠️ " + message;
+    error.textContent =
+        "⚠️ " + message;
 
-  error.style.display = "block";
+    error.style.display =
+        "block";
 }
 
 
+/* =========================================
+   نسخ الرابط
+========================================= */
+
 function copyUrl() {
 
-  navigator.clipboard.writeText(
-    document.getElementById("url").textContent
-  );
+    const url =
+        document.getElementById("url").textContent;
 
-  alert("تم نسخ الرابط.");
+    navigator.clipboard.writeText(url)
+        .then(function() {
+
+            alert("تم نسخ الرابط ✅");
+
+        })
+        .catch(function() {
+
+            alert("لم يتم نسخ الرابط تلقائيًا.");
+
+        });
+
 }
 
 </script>
