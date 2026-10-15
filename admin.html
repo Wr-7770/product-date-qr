@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>إدارة المنتجات | تاريخ المنتج</title><link rel="stylesheet" href="style.css"><script src="script.js" defer></script>
+</head>
+<body data-page="admin">
+<header class="site-header"><a class="brand" href="index.html"><span class="brand-mark">ت</span><span>تاريخ المنتج<small>Product Date</small></span></a><a class="header-link" href="index.html">صفحة المنتج</a></header>
+<main class="container">
+<section class="hero"><div class="eyebrow">لوحة التحكم التجريبية</div><h1>إدارة المنتجات</h1><p>أدخل بيانات المنتج لإنشاء رابط وصفحة QR يمكن مسحها بكاميرا الجوال.</p></section>
+<section class="panel"><h2>إنشاء منتج جديد</h2>
+<form id="productForm" novalidate><div class="form-grid">
+<label class="field"><span>اسم المنتج <b>*</b></span><input id="productName" maxlength="100" placeholder="مثال: بيض" required></label>
+<label class="field"><span>رقم التشغيلة <b>*</b></span><input id="productLot" maxlength="60" placeholder="مثال: LOT-132" required></label>
+<label class="field"><span>تاريخ الإنتاج <b>*</b></span><input id="productionDate" type="date" required></label>
+<label class="field"><span>تاريخ الانتهاء <b>*</b></span><input id="expiryDate" type="date" required></label>
+</div><p id="formMessage" class="form-message" role="alert" hidden></p><button class="button primary full" type="submit">إنشاء المنتج و QR</button></form></section>
+<section id="qrResult" class="panel qr-result" hidden aria-live="polite"><div class="section-heading"><div><h2>تم إنشاء المنتج</h2><p>جرّب مسح رمز QR بكاميرا هاتفك.</p></div></div>
+<div class="qr-layout"><div class="qr-frame"><img id="qrImage" alt="رمز QR لفتح صفحة المنتج"></div><div class="qr-info"><h3 id="resultName"></h3><p id="resultDates"></p>
+<label class="field"><span>رابط صفحة المنتج</span><input id="productUrl" type="url" readonly></label>
+<div class="button-row"><button id="copyLinkButton" class="button secondary" type="button">نسخ الرابط</button><a id="downloadQr" class="button secondary" href="#" target="_blank" rel="noopener">فتح صورة QR</a><a id="openProduct" class="button dark" href="#" target="_blank" rel="noopener">فتح صفحة المنتج</a></div><p class="small-note">لحفظ صورة QR على هاتفك، افتح الصورة ثم استخدم خيار التنزيل أو الحفظ من المتصفح.</p></div></div></section>
+<section class="panel history-panel"><div class="section-heading"><div><h2>سجل المنتجات</h2><p>السجل محفوظ في هذا المتصفح فقط.</p></div><button id="clearHistoryButton" class="button danger-outline" type="button">حذف السجل</button></div><div id="productsList" class="products-list"><div class="empty">جارٍ تحميل السجل…</div></div></section>
+<aside class="notice"><strong>مهم:</strong> هذا إصدار تجريبي بلا قاعدة بيانات. السجل محفوظ على الجهاز والمتصفح الحالي فقط، ويمكن تعديل البيانات الموجودة في الرابط؛ لا تستخدمه كنظام رسمي لسلامة الأغذية أو بيانات المصانع قبل إضافة خادم وقاعدة بيانات وحماية مناسبة.</aside>
+</main><footer class="site-footer">تاريخ المنتج · نموذج تجريبي مجاني</footer>
+</body></html>
