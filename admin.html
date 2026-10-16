@@ -16,23 +16,20 @@ h2{font-size:20px;margin:0 0 18px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
 .field{margin-bottom:16px}
 label{display:block;font-weight:bold;margin-bottom:8px;font-size:14px}
-input{width:100%;padding:12px;border:1px solid #ddd;border-radius:7px;font-size:16px;background:#fff}
+input{width:100%;padding:12px;border:1px solid #ddd;border-radius:7px;font-size:16px;background:#fff;color:#222}
 input:focus{outline:2px solid #b8d4ff;border-color:#4385f5}
 button,.btn{border:0;border-radius:7px;padding:11px 15px;font-size:14px;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}
 .primary{background:#2463eb;color:#fff}
 .secondary{background:#eee;color:#222}
 .danger{background:#fee2e2;color:#b91c1c}
-.success{background:#dcfce7;color:#166534}
 .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-button:disabled{opacity:.5;cursor:not-allowed}
-#message{margin-top:14px;padding:12px;border-radius:7px;display:none}
+#message{margin-top:14px;padding:12px;border-radius:7px;display:none;overflow-wrap:anywhere}
 #result{display:none;margin-top:20px;border-top:1px solid #eee;padding-top:20px}
 #qr{display:block;width:200px;height:200px;object-fit:contain;margin:15px auto}
 .linkbox{padding:12px;background:#f5f5f5;border-radius:7px;overflow-wrap:anywhere;direction:ltr;text-align:left;font-size:13px}
 .record{padding:16px 0;border-bottom:1px solid #eee}
-.record:last-child{border-bottom:0}
 .record-title{font-weight:bold;font-size:17px}
-.record-meta{color:#666;font-size:13px;line-height:1.9;margin-top:7px}
+.record-meta{color:#666;font-size:13px;line-height:1.9;margin-top:7px;overflow-wrap:anywhere}
 .badge{display:inline-block;border-radius:5px;padding:5px 8px;font-size:12px;margin-top:7px}
 .empty{color:#777;text-align:center;padding:25px 5px}
 .topline{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
@@ -43,334 +40,364 @@ button:disabled{opacity:.5;cursor:not-allowed}
 <body>
 <div class="container">
 
-  <section class="card">
-    <h1>إدارة المنتجات</h1>
-    <p class="subtitle">إنشاء رابط و QR للمنتج</p>
+<section class="card">
+<h1>إدارة المنتجات</h1>
+<p class="subtitle">إنشاء رابط و QR للمنتج</p>
 
-    <form id="productForm">
-      <div class="field">
-        <label for="name">اسم المنتج</label>
-        <input id="name" maxlength="120" placeholder="مثال: بيض" required>
-      </div>
+<form id="productForm">
+<div class="field">
+<label for="name">اسم المنتج</label>
+<input id="name" maxlength="120" placeholder="مثال: بيض" required>
+</div>
 
-      <div class="grid">
-        <div class="field">
-          <label for="production">تاريخ الإنتاج</label>
-          <input id="production" type="date" required>
-        </div>
-        <div class="field">
-          <label for="expiry">تاريخ الانتهاء</label>
-          <input id="expiry" type="date" required>
-        </div>
-      </div>
+<div class="grid">
+<div class="field">
+<label for="production">تاريخ الإنتاج</label>
+<input id="production" type="date" required>
+</div>
+<div class="field">
+<label for="expiry">تاريخ الانتهاء</label>
+<input id="expiry" type="date" required>
+</div>
+</div>
 
-      <div class="field">
-        <label for="lot">رقم التشغيلة</label>
-        <input id="lot" maxlength="80" placeholder="مثال: LOT-123" required>
-      </div>
+<div class="field">
+<label for="lot">رقم التشغيلة</label>
+<input id="lot" maxlength="80" placeholder="مثال: LOT-123" required>
+</div>
 
-      <div class="actions">
-        <button class="primary" id="saveButton" type="submit">إنشاء المنتج</button>
-        <button class="secondary" id="cancelEdit" type="button" hidden>إلغاء التعديل</button>
-      </div>
-    </form>
+<div class="actions">
+<button class="primary" id="saveButton" type="submit">إنشاء المنتج</button>
+<button class="secondary" id="cancelEdit" type="button" hidden>إلغاء التعديل</button>
+</div>
+</form>
 
-    <div id="message" role="status"></div>
+<div id="message" role="status"></div>
 
-    <div id="result">
-      <h2>تم إنشاء المنتج ✓</h2>
-      <p>رابط المنتج:</p>
-      <div class="linkbox" id="productLink"></div>
-      <img id="qr" alt="رمز QR للمنتج">
-      <div class="actions">
-        <button class="secondary" id="copyLink" type="button">نسخ الرابط</button>
-        <a class="btn primary" id="openProduct" target="_blank" rel="noopener">فتح صفحة المنتج</a>
-        <a class="btn secondary" id="downloadQR" download="product-qr.png">تنزيل QR</a>
-      </div>
-    </div>
-  </section>
+<div id="result">
+<h2>تم إنشاء المنتج ✓</h2>
+<p>رابط المنتج:</p>
+<div class="linkbox" id="productLink"></div>
+<img id="qr" alt="رمز QR للمنتج">
+<div class="actions">
+<button class="secondary" id="copyLink" type="button">نسخ الرابط</button>
+<a class="btn primary" id="openProduct" target="_blank" rel="noopener">فتح صفحة المنتج</a>
+<a class="btn secondary" id="downloadQR" download="product-qr.png">تنزيل QR</a>
+</div>
+</div>
+</section>
 
-  <section class="card">
-    <div class="topline">
-      <h2>سجل المنتجات</h2>
-      <button class="danger" id="clearHistory" type="button">حذف السجل</button>
-    </div>
-    <p class="small">المنتجات التي أنشأتها من هذا المتصفح.</p>
-    <div id="history"></div>
-  </section>
+<section class="card">
+<div class="topline">
+<h2>سجل المنتجات</h2>
+<button class="danger" id="clearHistory" type="button">حذف السجل</button>
+</div>
+<p class="small">المنتجات المحفوظة في هذا المتصفح.</p>
+<div id="history"></div>
+</section>
 
 </div>
 
 <script>
 (function(){
-  const STORAGE_KEY = "vault_product_records_v1";
-  const form = document.getElementById("productForm");
-  const nameInput = document.getElementById("name");
-  const productionInput = document.getElementById("production");
-  const expiryInput = document.getElementById("expiry");
-  const lotInput = document.getElementById("lot");
-  const saveButton = document.getElementById("saveButton");
-  const cancelEdit = document.getElementById("cancelEdit");
-  const message = document.getElementById("message");
-  const result = document.getElementById("result");
-  const history = document.getElementById("history");
-  let editingId = null;
-  let currentLink = "";
+"use strict";
 
-  function loadRecords(){
-    try {
-      const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-      return Array.isArray(data) ? data : [];
-    } catch {
-      return [];
+const STORAGE_KEY = "vault_product_records_v1";
+const $ = id => document.getElementById(id);
+
+const form = $("productForm");
+const nameInput = $("name");
+const productionInput = $("production");
+const expiryInput = $("expiry");
+const lotInput = $("lot");
+const saveButton = $("saveButton");
+const cancelEdit = $("cancelEdit");
+const message = $("message");
+const result = $("result");
+const history = $("history");
+
+let editingId = null;
+let currentLink = "";
+
+function loadRecords(){
+  try {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    return Array.isArray(data) ? data : [];
+  } catch {
+    return [];
+  }
+}
+
+function storeRecords(records){
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+    return true;
+  } catch {
+    showMessage("تعذّر حفظ السجل في المتصفح. قد تكون مساحة التخزين ممتلئة.", true);
+    return false;
+  }
+}
+
+function showMessage(text, isError = false){
+  message.textContent = text;
+  message.style.display = "block";
+  message.style.background = isError ? "#fee2e2" : "#dcfce7";
+  message.style.color = isError ? "#991b1b" : "#166534";
+}
+
+function hideMessage(){
+  message.style.display = "none";
+}
+
+/* التحقق من التاريخ دون الاعتماد على صيغة عرض المتصفح */
+function validDate(value){
+  if(!value) return false;
+
+  const parts = value.split("-");
+  if(parts.length !== 3) return false;
+
+  const year = Number(parts[0]);
+  const month = Number(parts[1]);
+  const day = Number(parts[2]);
+
+  if(!Number.isInteger(year) || !Number.isInteger(month) ||
+     !Number.isInteger(day) || year < 1) return false;
+
+  const date = new Date(0);
+  date.setHours(12, 0, 0, 0);
+  date.setFullYear(year, month - 1, day);
+
+  return date.getFullYear() === year &&
+         date.getMonth() === month - 1 &&
+         date.getDate() === day;
+}
+
+function todayString(){
+  const d = new Date();
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return year + "-" + month + "-" + day;
+}
+
+function validate(data){
+  if(!data.name.trim() || !data.production || !data.expiry || !data.lot.trim()){
+    return "يرجى تعبئة جميع الحقول.";
+  }
+
+  if(!validDate(data.production) || !validDate(data.expiry)){
+    return "يرجى إدخال تواريخ صحيحة.";
+  }
+
+  if(data.production > todayString()){
+    return "تاريخ الإنتاج لا يمكن أن يكون في المستقبل.";
+  }
+
+  if(data.expiry < data.production){
+    return "تاريخ الانتهاء لا يمكن أن يكون قبل تاريخ الإنتاج.";
+  }
+
+  return "";
+}
+
+function productUrl(data){
+  const url = new URL("index.html", window.location.href);
+  url.search = new URLSearchParams({
+    name: data.name,
+    production: data.production,
+    expiry: data.expiry,
+    lot: data.lot
+  }).toString();
+  return url.href;
+}
+
+function showResult(data){
+  currentLink = productUrl(data);
+  $("productLink").textContent = currentLink;
+  $("openProduct").href = currentLink;
+
+  const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="
+    + encodeURIComponent(currentLink);
+
+  $("qr").src = qrUrl;
+  $("downloadQR").href = qrUrl;
+  result.style.display = "block";
+}
+
+function resetForm(){
+  form.reset();
+  editingId = null;
+  saveButton.textContent = "إنشاء المنتج";
+  cancelEdit.hidden = true;
+}
+
+function makeButton(text, className, action){
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = className;
+  button.textContent = text;
+  button.addEventListener("click", action);
+  return button;
+}
+
+async function copyText(text){
+  try {
+    await navigator.clipboard.writeText(text);
+    showMessage("تم نسخ الرابط.");
+  } catch {
+    window.prompt("انسخ الرابط:", text);
+  }
+}
+
+function renderHistory(){
+  const records = loadRecords().sort((a,b) => b.updatedAt - a.updatedAt);
+  history.replaceChildren();
+
+  if(records.length === 0){
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    empty.textContent = "لا توجد منتجات محفوظة حتى الآن.";
+    history.appendChild(empty);
+    return;
+  }
+
+  records.forEach(record => {
+    const item = document.createElement("div");
+    item.className = "record";
+
+    const title = document.createElement("div");
+    title.className = "record-title";
+    title.textContent = record.name;
+    item.appendChild(title);
+
+    const meta = document.createElement("div");
+    meta.className = "record-meta";
+    meta.textContent = "الإنتاج: " + record.production +
+      " | الانتهاء: " + record.expiry +
+      " | التشغيلة: " + record.lot;
+    item.appendChild(meta);
+
+    const badge = document.createElement("span");
+    badge.className = "badge";
+    if(record.expiry < todayString()){
+      badge.textContent = "🔴 منتهي الصلاحية";
+      badge.style.background = "#fee2e2";
+    } else {
+      badge.textContent = "🟢 صالح";
+      badge.style.background = "#dcfce7";
     }
+    item.appendChild(badge);
+
+    const actions = document.createElement("div");
+    actions.className = "actions";
+
+    actions.appendChild(makeButton("فتح صفحة المنتج", "primary", () => {
+      window.open(productUrl(record), "_blank", "noopener");
+    }));
+
+    actions.appendChild(makeButton("نسخ الرابط", "secondary", () => {
+      copyText(productUrl(record));
+    }));
+
+    actions.appendChild(makeButton("تعديل", "secondary", () => {
+      editingId = record.id;
+      nameInput.value = record.name;
+      productionInput.value = record.production;
+      expiryInput.value = record.expiry;
+      lotInput.value = record.lot;
+      saveButton.textContent = "حفظ التعديلات";
+      cancelEdit.hidden = false;
+      hideMessage();
+      result.style.display = "none";
+      window.scrollTo({top:0, behavior:"smooth"});
+    }));
+
+    actions.appendChild(makeButton("حذف", "danger", () => {
+      if(!confirm("هل تريد حذف المنتج «" + record.name + "» من السجل؟")) return;
+
+      const remaining = loadRecords().filter(r => r.id !== record.id);
+      if(storeRecords(remaining)){
+        if(editingId === record.id) {
+          resetForm();
+        }
+        renderHistory();
+        showMessage("تم حذف المنتج من السجل.");
+      }
+    }));
+
+    item.appendChild(actions);
+    history.appendChild(item);
+  });
+}
+
+form.addEventListener("submit", function(event){
+  event.preventDefault();
+  hideMessage();
+
+  const data = {
+    name: nameInput.value.trim(),
+    production: productionInput.value,
+    expiry: expiryInput.value,
+    lot: lotInput.value.trim()
+  };
+
+  const error = validate(data);
+  if(error){
+    showMessage(error, true);
+    return;
   }
 
-  function storeRecords(records){
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
-      return true;
-    } catch {
-      showMessage("تعذّر حفظ السجل في هذا المتصفح.", true);
-      return false;
-    }
-  }
+  const records = loadRecords();
+  const now = Date.now();
 
-  function showMessage(text, isError){
-    message.textContent = text;
-    message.style.display = "block";
-    message.style.background = isError ? "#fee2e2" : "#dcfce7";
-    message.style.color = isError ? "#991b1b" : "#166534";
-  }
-
-  function hideMessage(){
-    message.style.display = "none";
-  }
-
-  function validDate(value){
-    if(!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
-    const d = new Date(value + "T00:00:00");
-    return !Number.isNaN(d.getTime()) &&
-      d.toISOString().slice(0,10) === value;
-  }
-
-  function todayString(){
-    const d = new Date();
-    d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
-    return d.toISOString().slice(0,10);
-  }
-
-  function validate(data){
-    if(!data.name.trim() || !data.production || !data.expiry || !data.lot.trim()){
-      return "يرجى تعبئة جميع الحقول.";
-    }
-    if(!validDate(data.production) || !validDate(data.expiry)){
-      return "يرجى إدخال تواريخ صحيحة.";
-    }
-    if(data.production > todayString()){
-      return "تاريخ الإنتاج لا يمكن أن يكون في المستقبل.";
-    }
-    if(data.expiry < data.production){
-      return "تاريخ الانتهاء لا يمكن أن يكون قبل تاريخ الإنتاج.";
-    }
-    return "";
-  }
-
-  function productUrl(data){
-    const url = new URL("index.html", window.location.href);
-    url.search = new URLSearchParams({
-      name: data.name,
-      production: data.production,
-      expiry: data.expiry,
-      lot: data.lot
-    }).toString();
-    return url.href;
-  }
-
-  function showResult(data){
-    currentLink = productUrl(data);
-    document.getElementById("productLink").textContent = currentLink;
-    document.getElementById("openProduct").href = currentLink;
-
-    const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="
-      + encodeURIComponent(currentLink);
-    document.getElementById("qr").src = qrUrl;
-    document.getElementById("downloadQR").href = qrUrl;
-    result.style.display = "block";
-  }
-
-  function resetForm(){
-    form.reset();
-    editingId = null;
-    saveButton.textContent = "إنشاء المنتج";
-    cancelEdit.hidden = true;
-    hideMessage();
-  }
-
-  function makeButton(text, className, action){
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = className;
-    button.textContent = text;
-    button.addEventListener("click", action);
-    return button;
-  }
-
-  function renderHistory(){
-    const records = loadRecords().sort((a,b) => b.updatedAt - a.updatedAt);
-    history.replaceChildren();
-
-    if(records.length === 0){
-      const empty = document.createElement("div");
-      empty.className = "empty";
-      empty.textContent = "لا توجد منتجات محفوظة حتى الآن.";
-      history.appendChild(empty);
+  if(editingId){
+    const index = records.findIndex(r => r.id === editingId);
+    if(index === -1){
+      showMessage("لم يتم العثور على المنتج في السجل.", true);
       return;
     }
-
-    records.forEach(record => {
-      const item = document.createElement("div");
-      item.className = "record";
-
-      const title = document.createElement("div");
-      title.className = "record-title";
-      title.textContent = record.name;
-      item.appendChild(title);
-
-      const meta = document.createElement("div");
-      meta.className = "record-meta";
-      meta.textContent =
-        "الإنتاج: " + record.production +
-        " | الانتهاء: " + record.expiry +
-        " | التشغيلة: " + record.lot;
-      item.appendChild(meta);
-
-      const badge = document.createElement("span");
-      badge.className = "badge";
-      if(record.expiry < todayString()){
-        badge.textContent = "🔴 منتهي الصلاحية";
-        badge.style.background = "#fee2e2";
-      } else {
-        badge.textContent = "🟢 صالح";
-        badge.style.background = "#dcfce7";
-      }
-      item.appendChild(badge);
-
-      const actions = document.createElement("div");
-      actions.className = "actions";
-
-      actions.appendChild(makeButton("فتح صفحة المنتج", "primary", () => {
-        window.open(productUrl(record), "_blank", "noopener");
-      }));
-
-      actions.appendChild(makeButton("تعديل", "secondary", () => {
-        editingId = record.id;
-        nameInput.value = record.name;
-        productionInput.value = record.production;
-        expiryInput.value = record.expiry;
-        lotInput.value = record.lot;
-        saveButton.textContent = "حفظ التعديلات";
-        cancelEdit.hidden = false;
-        hideMessage();
-        result.style.display = "none";
-        window.scrollTo({top:0, behavior:"smooth"});
-      }));
-
-      actions.appendChild(makeButton("نسخ الرابط", "secondary", async () => {
-        const link = productUrl(record);
-        try {
-          await navigator.clipboard.writeText(link);
-          showMessage("تم نسخ رابط المنتج.");
-        } catch {
-          window.prompt("انسخ الرابط التالي:", link);
-        }
-      }));
-
-      actions.appendChild(makeButton("حذف", "danger", () => {
-        if(!confirm("هل تريد حذف المنتج «" + record.name + "» من السجل؟")) return;
-        const remaining = loadRecords().filter(r => r.id !== record.id);
-        if(storeRecords(remaining)){
-          if(editingId === record.id) resetForm();
-          renderHistory();
-          showMessage("تم حذف المنتج من السجل.");
-        }
-      }));
-
-      item.appendChild(actions);
-      history.appendChild(item);
+    records[index] = {...records[index], ...data, updatedAt:now};
+  } else {
+    records.push({
+      ...data,
+      id: (window.crypto && crypto.randomUUID)
+        ? crypto.randomUUID()
+        : String(now) + Math.random().toString(16).slice(2),
+      createdAt:now,
+      updatedAt:now
     });
   }
 
-  form.addEventListener("submit", function(event){
-    event.preventDefault();
-    hideMessage();
+  if(!storeRecords(records)) return;
 
-    const data = {
-      name: nameInput.value.trim(),
-      production: productionInput.value,
-      expiry: expiryInput.value,
-      lot: lotInput.value.trim()
-    };
-
-    const error = validate(data);
-    if(error){
-      showMessage(error, true);
-      return;
-    }
-
-    const records = loadRecords();
-    const now = Date.now();
-
-    if(editingId){
-      const index = records.findIndex(r => r.id === editingId);
-      if(index === -1){
-        showMessage("لم يتم العثور على المنتج في السجل.", true);
-        return;
-      }
-      records[index] = {...records[index], ...data, updatedAt:now};
-    } else {
-      records.push({
-        ...data,
-        id: (window.crypto && crypto.randomUUID)
-          ? crypto.randomUUID()
-          : String(now) + Math.random().toString(16).slice(2),
-        createdAt:now,
-        updatedAt:now
-      });
-    }
-
-    if(!storeRecords(records)) return;
-
-    showResult(data);
-    renderHistory();
-    showMessage(editingId ? "تم حفظ تعديلات المنتج." : "تم إنشاء المنتج وحفظه في السجل.");
-    resetForm();
-    result.style.display = "block";
-  });
-
-  cancelEdit.addEventListener("click", resetForm);
-
-  document.getElementById("copyLink").addEventListener("click", async function(){
-    if(!currentLink) return;
-    try {
-      await navigator.clipboard.writeText(currentLink);
-      showMessage("تم نسخ الرابط.");
-    } catch {
-      window.prompt("انسخ الرابط التالي:", currentLink);
-    }
-  });
-
-  document.getElementById("clearHistory").addEventListener("click", function(){
-    if(!confirm("هل أنت متأكد من حذف جميع المنتجات المحفوظة في هذا المتصفح؟")) return;
-    if(storeRecords([])){
-      resetForm();
-      result.style.display = "none";
-      renderHistory();
-      showMessage("تم حذف سجل المنتجات.");
-    }
-  });
-
+  showResult(data);
   renderHistory();
+  showMessage(editingId ? "تم حفظ تعديلات المنتج." : "تم إنشاء المنتج وحفظه في السجل.");
+  resetForm();
+  result.style.display = "block";
+});
+
+cancelEdit.addEventListener("click", function(){
+  resetForm();
+  hideMessage();
+});
+
+$("copyLink").addEventListener("click", function(){
+  if(currentLink) copyText(currentLink);
+});
+
+$("clearHistory").addEventListener("click", function(){
+  if(!confirm("هل أنت متأكد من حذف جميع المنتجات المحفوظة في هذا المتصفح؟")) return;
+
+  if(storeRecords([])){
+    resetForm();
+    result.style.display = "none";
+    renderHistory();
+    showMessage("تم حذف سجل المنتجات.");
+  }
+});
+
+renderHistory();
 })();
 </script>
 </body>
